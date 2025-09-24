@@ -10,13 +10,7 @@
 </p>
 
 
-## MY GITHUB STATS
 
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=noobgamingph&show_icons=true&theme=radical)
-
-## 
-
-[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=noobgamingph&theme=radical)](https://git.io/streak-stats)
 
 ## CREDITS
 
