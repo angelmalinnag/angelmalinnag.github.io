@@ -5,10 +5,9 @@
 
 # My Socials
 <p align="left">
-<a href="https://www.facebook.com/elpasanty"" height="30" /></a>
-<a href="https://www.instagram.com/malinnag.a/" alt="Instagram" height="30" /></a>
+<a href="https://www.facebook.com/elpasanty" target="blank"><img align="center" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" alt="" height="30" /></a>
+<a href="https://www.instagram.com/malinnag.a/" target="blank"><img align="center" src="https://github.com/mishmanners/MishManners/blob/master/socials/instagram.png" alt="Instagram" height="30" /></a>
 </p>
-
 
 
 
