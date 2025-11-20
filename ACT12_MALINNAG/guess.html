@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+
+    <style>
+        /* General styling for the body */
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #282c34;
+            /* Dark background */
+            color: #ffffff;
+            /* White text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        /* Styling for the game container */
+        
+        .game-container {
+            background-color: #384252;
+            /* Slightly lighter dark background */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        /* Styling for the heading */
+        
+        h2 {
+            color: #61dafb;
+            /* Accent color */
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        /* Styling for the number input field */
+        
+        #guessInput {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            width: calc(100% - 22px);
+            /* Full width minus padding */
+            text-align: center;
+            font-size: 1.1em;
+        }
+        /* Styling for the button */
+        
+        button {
+            background-color: #4CAF50;
+            /* Green color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        /* Hover effect for the button */
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        /* Styling for the message area */
+        
+        #message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="game-container">
+        <h2>Guess the Number!</h2>
+        <p>I'm thinking of a number between 1 and 100.</p>
+
+        <input type="number" id="guessInput" min="1" max="100" placeholder="Enter your guess">
+
+        <button onclick="checkGuess()">Submit Guess</button>
+
+        <p id="message" style="color: #ffcc00;">Awaiting your first guess...</p>
+    </div>
+
+    <script>
+        let correctNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guessInput').value);
+            const messageElement = document.getElementById('message');
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                messageElement.textContent = "Please enter a valid number between 1 and 100.";
+                messageElement.style.color = "#ff6347"; // Red for error
+                return;
+            }
+
+            attempts++;
+
+            if (guess === correctNumber) {
+                messageElement.textContent = `🎉 Correct! You guessed it in ${attempts} attempts.`;
+                messageElement.style.color = "#4CAF50"; // Green for success
+            } else if (guess < correctNumber) {
+                messageElement.textContent = "Too Low! Try again.";
+                messageElement.style.color = "#61dafb"; // Blue for hint
+            } else {
+                messageElement.textContent = "Too High! Try again.";
+                messageElement.style.color = "#ffcc00"; // Yellow for hint
+            }
+        }
+    </script>
+</body>
+
+</html>
