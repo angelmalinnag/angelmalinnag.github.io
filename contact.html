@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel Malinnag - Contact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS RESET & VARIABLES
+        ======================================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+         :root {
+            /* Colors */
+            --primary-color: #667eea;
+            --primary-dark: #5568d3;
+            --primary-light: #8b9ef5;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --dark-bg: #1a1a2e;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            /* Shadows */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+            /* Spacing */
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 40px;
+            --spacing-xl: 60px;
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 15px;
+            /* Transitions */
+            --transition: 0.3s ease;
+        }
+        /* ========================================
+           GENERAL STYLES
+        ======================================== */
+        
+        body {
+            margin: 0;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--light-bg);
+            color: var(--text-primary);
+            scroll-behavior: smooth;
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+        
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0 0 var(--spacing-md);
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+        
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+        }
+        
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+        }
+        
+        p {
+            margin: 0 0 var(--spacing-sm);
+            line-height: 1.8;
+        }
+        /* ========================================
+           HEADER & NAVIGATION
+        ======================================== */
+        
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            padding: var(--spacing-sm) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
+            transition: padding var(--transition);
+        }
+        
+        header.scrolled {
+            padding: 12px 0;
+            background: rgba(26, 26, 46, 0.98);
+        }
+        
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: inline-block;
+            transition: transform var(--transition);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 8px 16px;
+            transition: all var(--transition);
+            border-radius: var(--radius-sm);
+        }
+        
+        nav a:hover {
+            color: var(--white);
+            background: rgba(102, 126, 234, 0.2);
+        }
+        
+        nav a.active {
+            background: rgba(102, 126, 234, 0.3);
+        }
+        
+        nav a:last-child {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 10px 24px;
+            border-radius: 25px;
+        }
+        
+        nav a:last-child:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        /* Mobile Menu Toggle */
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            transition: transform var(--transition);
+        }
+        
+        .menu-toggle:hover {
+            transform: rotate(90deg);
+        }
+        /* ========================================
+           CONTACT SECTION
+        ======================================== */
+        
+        .section {
+            padding: var(--spacing-xl) 0;
+            min-height: calc(100vh - 70px);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            padding-top: 80px;
+        }
+        
+        .section-header h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .profile-image {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .profile-image img {
+            width: 280px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            transition: transform var(--transition);
+            margin: 0 auto;
+        }
+        
+        .profile-image img:hover {
+            transform: scale(1.05);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .contact-card {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: all var(--transition);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .contact-card:nth-child(2) .contact-icon {
+            animation-delay: 0.5s;
+        }
+        
+        .contact-card:nth-child(3) .contact-icon {
+            animation-delay: 1s;
+        }
+        
+        .contact-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+        
+        .contact-card p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+        
+        .contact-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color var(--transition);
+            word-break: break-all;
+        }
+        
+        .contact-card a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+        
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .social-btn.facebook {
+            background: linear-gradient(135deg, #1877f2 0%, #0c63d4 100%);
+        }
+        
+        .social-btn.instagram {
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        
+        .social-btn.github {
+            background: linear-gradient(135deg, #333 0%, #000 100%);
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            margin: var(--spacing-xl) 0;
+        }
+        /* ========================================
+           FOOTER
+        ======================================== */
+        
+        footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            margin-top: var(--spacing-xl);
+        }
+        
+        footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+        
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+        
+        footer a:hover {
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+        /* ========================================
+           RESPONSIVE DESIGN
+        ======================================== */
+        
+        @media (max-width: 768px) {
+             :root {
+                --spacing-xl: 40px;
+                --spacing-lg: 30px;
+            }
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--dark-bg);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: var(--spacing-lg);
+                gap: var(--spacing-md);
+                transition: left var(--transition);
+                box-shadow: var(--shadow-lg);
+            }
+            nav.active {
+                left: 0;
+            }
+            nav a {
+                font-size: 1.25rem;
+                width: 100%;
+                text-align: center;
+                padding: var(--spacing-sm);
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .section-header {
+                padding-top: 40px;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .profile-image img {
+                width: 220px;
+                height: 240px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER & NAVIGATION -->
+    <header>
+        <div class="container">
+            <div class="logo" onclick="window.location.href='index.html'">My Website</div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav id="nav">
+                <a href="index.html">Home</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="active">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTACT SECTION -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h1>Get In Touch</h1>
+                <p>Contact me if you need me 😘</p>
+            </div>
+
+            <div class="profile-image">
+                <img src="ACT12_MALINNAG/14.jpg" alt="Angel Malinnag">
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3>Phone</h3>
+                    <p><a href="tel:09380332339">0938 033 2339</a></p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">👤</div>
+                    <h3>Facebook</h3>
+                    <p><a href="https://www.facebook.com/elpasanty" target="_blank">Angel Pimentel Malinnag</a></p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">💻</div>
+                    <h3>GitHub</h3>
+                    <p><a href="https://angelmalinnag.github.io" target="_blank">angelmalinnag.github.io</a></p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="social-links">
+                <a href="https://www.facebook.com/elpasanty" target="_blank" class="social-btn facebook">
+                    📘 Facebook
+                </a>
+                <a href="https://www.instagram.com/malinnag.a/" target="_blank" class="social-btn instagram">
+                    📷 Instagram
+                </a>
+                <a href="https://github.com/angelmalinnag/angelmalinnag.github.io" target="_blank" class="social-btn github">
+                    🔗 GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Angel Malinnag. All rights reserved.</p>
+            <p>Designed with ❤️</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav').classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const nav = document.getElementById('nav');
+            const toggle = document.querySelector('.menu-toggle');
+            if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+                nav.classList.remove('active');
+            }
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Food Challenge</title>
+
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f4f4f0;
+            /* Off-white kitchen background */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        
+        .game-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+            border: 4px solid #ff9800;
+            /* Orange accent border */
+        }
+        
+        h1 {
+            color: #d32f2f;
+            /* Red-brown header */
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        /* --- Display Panels --- */
+        
+        .info-panel {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff3e0;
+            border-radius: 8px;
+        }
+        
+        #clue-display {
+            font-style: italic;
+            font-size: 1.4em;
+            color: #4CAF50;
+            /* Green clue text */
+            margin-bottom: 30px;
+            min-height: 50px;
+        }
+        /* --- Input and Controls --- */
+        
+        #guess-input {
+            padding: 12px;
+            font-size: 1.1em;
+            width: 70%;
+            max-width: 300px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        
+        .control-button {
+            padding: 12px 20px;
+            font-size: 1.1em;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .control-button:hover:not(:disabled) {
+            background-color: #fb8c00;
+        }
+        
+        .control-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        #feedback {
+            margin-top: 20px;
+            min-height: 30px;
+            font-weight: bold;
+        }
+        
+        #next-clue-btn {
+            background-color: #2196f3;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="game-container">
+        <h1>🍳 Guess the Food!</h1>
+
+        <div class="info-panel">
+            Guess: <strong id="guess-count">0</strong> / 3 | Clue Level: <strong id="clue-level">0</strong>
+        </div>
+
+        <div id="clue-display">Click START to begin!</div>
+
+        <div id="input-controls">
+            <input type="text" id="guess-input" placeholder="Your guess..." disabled>
+            <button id="submit-btn" class="control-button" onclick="submitGuess()" disabled>Submit</button>
+            <button id="next-clue-btn" class="control-button" onclick="getNextClue()" disabled>Next Clue</button>
+        </div>
+
+        <div id="feedback"></div>
+
+        <button id="start-btn" class="control-button" onclick="startGame()">Start Game</button>
+    </div>
+
+    <script>
+        const foodData = [{
+                answer: "PIZZA",
+                clues: [
+                    "I am usually round and flat, covered in tomato sauce.",
+                    "I am baked in an oven and often topped with cheese and pepperoni.",
+                    "I originated in Italy, but am popular worldwide for delivery."
+                ]
+            }, {
+                answer: "SUSHI",
+                clues: [
+                    "I typically include cooked rice seasoned with vinegar.",
+                    "I am often wrapped in seaweed and contain raw fish or seafood.",
+                    "I am a famous dish from Japan, served in bite-sized pieces."
+                ]
+            }, {
+                answer: "PANCAKE",
+                clues: [
+                    "I am a flat, round cake made from batter poured onto a griddle.",
+                    "I am commonly eaten for breakfast and stacked high.",
+                    "I am often served with butter, syrup, or fruit on top."
+                ]
+            }
+            // Add more food items here!
+        ];
+
+        const clueDisplay = document.getElementById('clue-display');
+        const guessInput = document.getElementById('guess-input');
+        const submitBtn = document.getElementById('submit-btn');
+        const nextClueBtn = document.getElementById('next-clue-btn');
+        const startBtn = document.getElementById('start-btn');
+        const feedback = document.getElementById('feedback');
+        const guessCountElement = document.getElementById('guess-count');
+        const clueLevelElement = document.getElementById('clue-level');
+
+        let currentFood = {};
+        let guessCount = 0;
+        let clueLevel = 0;
+        let maxGuesses = 3;
+
+        // --- Core Game Functions ---
+
+        function startGame() {
+            // Pick a random food item
+            const randomIndex = Math.floor(Math.random() * foodData.length);
+            currentFood = foodData[randomIndex];
+
+            guessCount = 0;
+            clueLevel = 0;
+
+            updateUI(true);
+            displayCurrentClue();
+            feedback.textContent = "Guess the food based on the clue!";
+            guessInput.focus();
+        }
+
+        function updateUI(active) {
+            gameActive = active;
+            guessCountElement.textContent = guessCount;
+            clueLevelElement.textContent = clueLevel + 1;
+
+            if (active) {
+                guessInput.disabled = false;
+                submitBtn.disabled = false;
+                nextClueBtn.disabled = false;
+                startBtn.style.display = 'none';
+            } else {
+                guessInput.disabled = true;
+                submitBtn.disabled = true;
+                nextClueBtn.disabled = true;
+                startBtn.style.display = 'inline-block';
+                startBtn.textContent = 'Play Again';
+            }
+        }
+
+        function displayCurrentClue() {
+            if (clueLevel < currentFood.clues.length) {
+                clueDisplay.textContent = `Clue #${clueLevel + 1}: ${currentFood.clues[clueLevel]}`;
+            }
+        }
+
+        function getNextClue() {
+            if (clueLevel < currentFood.clues.length - 1) {
+                clueLevel++;
+                updateUI(true);
+                displayCurrentClue();
+                guessInput.focus();
+            } else {
+                feedback.textContent = "That was the last clue! You must guess now.";
+                nextClueBtn.disabled = true;
+            }
+        }
+
+        function submitGuess() {
+            const guess = guessInput.value.trim().toUpperCase();
+            guessInput.value = '';
+
+            if (guess.length === 0) {
+                feedback.textContent = "Please enter a guess!";
+                return;
+            }
+
+            guessCount++;
+            guessCountElement.textContent = guessCount;
+
+            if (guess === currentFood.answer) {
+                endGame(true);
+            } else if (guessCount >= maxGuesses) {
+                endGame(false);
+            } else {
+                feedback.textContent = `❌ Incorrect! You have ${maxGuesses - guessCount} guesses left. Try another guess or get the next clue.`;
+            }
+        }
+
+        function endGame(isWin) {
+            updateUI(false);
+
+            if (isWin) {
+                feedback.textContent = `🎉 CORRECT! The food was ${currentFood.answer}! You won in ${guessCount} guesses.`;
+                clueDisplay.textContent = "You Solved It!";
+                feedback.style.color = '#4CAF50';
+            } else {
+                feedback.textContent = `😭 GAME OVER! You ran out of guesses. The correct food was ${currentFood.answer}.`;
+                clueDisplay.textContent = "Game Over!";
+                feedback.style.color = '#d32f2f';
+            }
+        }
+
+        // Handle Enter key submission
+        guessInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !submitBtn.disabled) {
+                submitGuess();
+            }
+        });
+
+        // --- Initial Setup ---
+        // Hide start button when game loads
+        startBtn.textContent = 'Start Game';
+        clueLevelElement.textContent = 'N/A';
+    </script>
+</body>
+
+</html>
